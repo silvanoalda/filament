@@ -1541,11 +1541,17 @@
                                                 ])
                                             >
                                                 @if ($isIndividuallySearchable)
+                                                    @if($filterComponent = $this->getTableFiltersForm()->getComponent($column->getName('name')))
+                                                        {{
+                                                            $filterComponent->getChildComponents()[0]->disableLabel(true);
+                                                        }}
+                                                    @else
                                                     <x-filament-tables::search-field
                                                         :debounce="$searchDebounce"
                                                         :on-blur="$isSearchOnBlur"
                                                         :wire-model="'tableColumnSearches.' . $columnName"
                                                     />
+                                                    @endif
                                                 @endif
                                             </td>
                                         @endforeach
